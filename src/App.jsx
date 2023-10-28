@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import SingleCard from './components/SingleCard.jsx'
+import './SingleCard.css';
+import SingleCard from './components/SingleCard';
+
 
 
 const cardImages = [
@@ -11,19 +13,6 @@ const cardImages = [
 {"src":"/img/lepoard.jpg", matched: false },
 {"src":"/img/cat.jpg", matched: false },
 ]
-
-
-// const cards = document.querySelectorAll('.card');
-
-// cards.forEach(card => {
-//   card.addEventListener('click', () => {
-//     card.classList.toggle('flipped');
-//   });
-// });
-
-// const cardFrontImage = [
-//   {"src":"/img/crown.jpg"}
-// ]
 
 function App() {
   const [cards, setCards] = useState([])
@@ -97,7 +86,7 @@ function App() {
       <p>Clicks: {clicks}</p> {/* Display the click count */}
       <div className="card-grid">
         {cards.map(card => (
-          <SingleCard 
+          <SingleCard
           key={card.id} 
           card={card}
           handleChoice={handleChoice}

@@ -7,7 +7,7 @@
 .card img {
     width: 100%; /* Makes the image take up 100% of the container width */
     display: block; /* Ensures the image is treated as a block-level element */
-    border: 2px solid #fff; /* Adds a white border around the image */
+    border: 2px solid #a49510; /* Adds a white border around the image */
     border-radius: 6px; /* Rounds the corners of the image */
 }
 
@@ -16,8 +16,6 @@
     transform: rotateY(90deg); /* Rotates the front side 90 degrees along the Y-axis, making it hidden */
     transition: all ease-in 0.2s; /* Adds a smooth transition effect for all properties over 0.2 seconds */
     position: absolute; /* Takes the front side out of the normal flow and positions it absolutely */
-    border: 4px solid #44c2c6; /* Add a border to the front side */
-    border-radius: 6px; /* Optionally, add border-radius for rounded corners */ 
 }
 
 /* Styles for the front side when the card is flipped */
@@ -30,8 +28,6 @@
 .card .back {
     transition: all ease-in 0.2s; /* Adds a smooth transition effect for all properties over 0.2 seconds */
     transition-delay: 0.2s; /* Delays the transition by 0.2 seconds */
-    border: 2px solid #c6af44;; /* Add a border to the back side */
-    border-radius: 6px; /* Optionally, add border-radius for rounded corners */
 }
 
 /* Styles for the back side when the card is flipped */

@@ -55,7 +55,5 @@ button:hover {
 
 .card .card-back {
   transform: rotateY(180deg);
-  background-color: #FFFF00; 
-  color: #333;
 }
 
