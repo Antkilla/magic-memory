@@ -18,7 +18,7 @@ function App() {
   const [turns, setTurns] = useState(0)
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
-  const [clicks, setClicks] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
 
   //randomize cards
   const shuffleCards = () =>  {
@@ -28,9 +28,6 @@ function App() {
 
     setCards(shuffledCards);
     setTurns(0);
-
-    // Reset the click count to 0
-    setClicks(0);
   }
 
   //handle a choice funct, make prop then pass to single card
@@ -39,7 +36,6 @@ function App() {
       setChoiceOne(card);
     } else {
       setChoiceTwo(card);
-      setClicks(clicks + 1);
     }
     
 
@@ -75,14 +71,19 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
+    
+    if (choiceOne && choiceTwo && choiceOne.src !== choiceTwo.src) {
+      setClickCount(prevClickCount => prevClickCount + 1);
+    }
   }
+  
 
 
   return (
     <div className="App">
       <h1>Magic Memory</h1>
       <button onClick={shuffleCards}>New Game</button>
-      <p>Clicks: {clicks}</p> {/* Display the click count */}
+      <p>Clicks: {clickCount}</p> {/* Display the click count */}
       <div className="card-grid">
         {cards.map(card => (
           <SingleCard
