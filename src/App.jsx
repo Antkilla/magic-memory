@@ -18,7 +18,9 @@ function App() {
   const [turns, setTurns] = useState(0)
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [disabled, setDisabled] = useState(false)
   const [clickCount, setClickCount] = useState(0);
+  const maxTurns = 6; // Set the maximum number of turns
 
   //randomize cards
   const shuffleCards = () =>  {
@@ -26,6 +28,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }))
 
+    setChoiceOne(null)
+    setChoiceTwo(null)
     setCards(shuffledCards);
     setTurns(0);
   }
@@ -47,8 +51,9 @@ function App() {
     
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     if (choiceOne && choiceTwo)  {
+      setDisabled(true)
 
       if(choiceOne.src === choiceTwo.src) {
         setCards(prevCards => {
@@ -56,7 +61,7 @@ function App() {
             if (card.src === choiceOne.src) {
               return {...card, matched: true}
             } else {
-              return card
+              return card;
             }
           })
         })  
@@ -71,12 +76,23 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
+    setDisabled(false)
     
     if (choiceOne && choiceTwo && choiceOne.src !== choiceTwo.src) {
       setClickCount(prevClickCount => prevClickCount + 1);
     }
   }
   
+  // Check if the maximum number of turns has been reached
+  if (turns === maxTurns) {
+    alert(`Game over! You reached the maximum number of turns: ${maxTurns} YOU SUCK!!!`);
+  }
+
+
+  //start a new game auto w/o clicking the new game button
+  useEffect(() => {
+    shuffleCards()
+  }, [])
 
 
   return (
@@ -84,16 +100,19 @@ function App() {
       <h1>Magic Memory</h1>
       <button onClick={shuffleCards}>New Game</button>
       <p>Clicks: {clickCount}</p> {/* Display the click count */}
+      
       <div className="card-grid">
         {cards.map(card => (
           <SingleCard
-          key={card.id} 
-          card={card}
-          handleChoice={handleChoice}
-          flipped={card === choiceOne || card === choiceTwo || card.matched}
+            key={card.id} 
+            card={card}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
           />
         ))}
       </div>
+      <p>Turns: {turns}</p> 
     </div>
   );
 };
