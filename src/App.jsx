@@ -20,7 +20,7 @@ function App() {
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
   const [clickCount, setClickCount] = useState(0);
-  const maxTurns = 6; // Set the maximum number of turns
+  const maxTurns = 8; // Set the maximum number of turns
 
   //randomize cards
   const shuffleCards = () =>  {
@@ -75,11 +75,12 @@ function App() {
   const resetTurn = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
-    setTurns(prevTurns => prevTurns + 1)
+    setClickCount(prevClickCount => prevClickCount + 1);
+
     setDisabled(false)
     
     if (choiceOne && choiceTwo && choiceOne.src !== choiceTwo.src) {
-      setClickCount(prevClickCount => prevClickCount + 1);
+      setTurns((prevTurns) => prevTurns + 1);    
     }
   }
   
